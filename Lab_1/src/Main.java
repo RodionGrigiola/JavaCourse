@@ -2,9 +2,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        problem_1();
-        problem_2();
-        problem_3();
+//        problem_1();
+//        problem_2();
+//        problem_3();
+          problem_4();
     }
 
     static void problem_1() {
@@ -88,9 +89,34 @@ public class Main {
                 }
             }
             else stepsTaken++;
-
         }
         System.out.println("Минимальное количество указаний карты, которые нужно выполнить, равно " + minSteps);
+    }
+    static void problem_4() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите количество дорог: ");
+        int numberOfRoads = scanner.nextInt();
+
+        int roadToTake = 0;
+        int maxHeight = 0;
+
+        for (int i = 1; i <= numberOfRoads; i++) {
+            System.out.print("Введите количество туннелей для дороги " + i + ": ");
+            int numberOfTunnels = scanner.nextInt();
+            int minTunnelHeight = Integer.MAX_VALUE;
+
+            for (int j = 1; j <= numberOfTunnels; j++) {
+                System.out.print("Введите высоту туннеля " + j + ": ");
+                int currentTunnelHeight = scanner.nextInt();
+                minTunnelHeight = Math.min(currentTunnelHeight, minTunnelHeight);
+            }
+
+            if(minTunnelHeight > maxHeight) {
+                roadToTake = i;
+                maxHeight = minTunnelHeight;
+            }
+        }
+        System.out.print(roadToTake + " " + maxHeight);
     }
 }
 
