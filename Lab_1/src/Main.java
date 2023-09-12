@@ -8,6 +8,7 @@ public class Main {
         problem_4();
         problem_5();
     }
+
     static void problem_1() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введите число: ");
