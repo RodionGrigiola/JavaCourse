@@ -8,6 +8,7 @@ public class Main {
         problem_4();
         problem_5();
     }
+
     static void problem_1() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введите число: ");
@@ -149,7 +150,6 @@ class isTwiceEvenNumber {
             digitProduct *= digit;
             temp /= 10;
         }
-
 
         if (digitSum % 2 == 0 && digitProduct % 2 == 0) {
             System.out.println("Число " + number + " является дважды четным.");
