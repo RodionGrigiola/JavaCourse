@@ -2,12 +2,12 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-//        problem_1();
-//        problem_2();
-//        problem_3();
-          problem_4();
+        problem_1();
+        problem_2();
+        problem_3();
+        problem_4();
+        problem_5();
     }
-
     static void problem_1() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введите число: ");
@@ -118,7 +118,43 @@ public class Main {
         }
         System.out.print(roadToTake + " " + maxHeight);
     }
+    static void problem_5() {
+        new isTwiceEvenNumber();
+    }
 }
+
+class isTwiceEvenNumber {
+    public isTwiceEvenNumber() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите трехзначное число: ");
+        int number = scanner.nextInt();
+        while(number < 100 || number > 999) {
+            System.out.println("Число должно быть трехзначным, повторите ввод: ");
+            number = scanner.nextInt();
+        }
+        calc(number);
+    }
+    public void calc(int number) {
+        int digitSum = 0;
+        int digitProduct = 1;
+
+        int temp = number;
+        while (temp > 0) {
+            int digit = temp % 10;
+            digitSum += digit;
+            digitProduct *= digit;
+            temp /= 10;
+        }
+
+        if (digitSum % 2 == 0 && digitProduct % 2 == 0) {
+            System.out.println("Число " + number + " является дважды четным.");
+        } else {
+            System.out.println("Число " + number + " не является дважды четным.");
+        }
+    }
+}
+
+
 
 
 
