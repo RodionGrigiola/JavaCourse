@@ -4,6 +4,7 @@ public class Main {
     public static void main(String[] args) {
         problem_1();
         problem_2();
+        problem_3();
     }
 
     static void problem_1() {
@@ -49,12 +50,61 @@ public class Main {
         }
         System.out.println("Сумма знакочередующегося ряда равна " + alternatingSum);
     }
+    static void problem_3() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Координата клада по оси X: ");
+        int treasureCoordX = scanner.nextInt();
+        System.out.print("Координата клада по оси Y: ");
+        int treasureCoordY = scanner.nextInt();
 
+        int positionX = 0;
+        int positionY = 0;
 
+        int stepsTaken = 1;
+        int minSteps = 0;
 
+        while(true) {
+            System.out.print("Введите направление: ");
+            String direction = scanner.next();
+            if(direction.equals("стоп")) break;
 
+            System.out.print("Введите количество шагов: ");
+            int steps = scanner.nextInt();
 
+            switch (direction) {
+                case "север" -> positionY += steps;
+                case "юг" -> positionY -= steps;
+                case "запад" -> positionX -= steps;
+                case "восток" -> positionX += steps;
+            }
+
+            if(positionX == treasureCoordX && positionY == treasureCoordY) {
+                if(minSteps == 0 || minSteps >= stepsTaken) {
+                    minSteps =  stepsTaken;
+                    stepsTaken = 0;
+                }
+                else {
+                    stepsTaken = 0;
+                }
+            }
+            else stepsTaken++;
+
+        }
+        System.out.println("Минимальное количество указаний карты, которые нужно выполнить, равно " + minSteps);
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
