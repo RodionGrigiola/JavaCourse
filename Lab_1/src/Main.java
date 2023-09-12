@@ -27,6 +27,7 @@ public class Main {
         }
         System.out.println("Для создания последовательности Коллатца для заданного числа потребовалось " + steps + " шагов.");
     }
+
     static void problem_2() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введите число: ");
@@ -51,6 +52,7 @@ public class Main {
         }
         System.out.println("Сумма знакочередующегося ряда равна " + alternatingSum);
     }
+
     static void problem_3() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Координата клада по оси X: ");
@@ -92,6 +94,7 @@ public class Main {
         }
         System.out.println("Минимальное количество указаний карты, которые нужно выполнить, равно " + minSteps);
     }
+
     static void problem_4() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введите количество дорог: ");
@@ -118,6 +121,7 @@ public class Main {
         }
         System.out.print(roadToTake + " " + maxHeight);
     }
+
     static void problem_5() {
         new isTwiceEvenNumber();
     }
@@ -145,6 +149,7 @@ class isTwiceEvenNumber {
             digitProduct *= digit;
             temp /= 10;
         }
+
 
         if (digitSum % 2 == 0 && digitProduct % 2 == 0) {
             System.out.println("Число " + number + " является дважды четным.");
