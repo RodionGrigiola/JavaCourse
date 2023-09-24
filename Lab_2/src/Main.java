@@ -10,10 +10,25 @@ public class Main {
 //            System.out.print(num + " ");
 //        }
 
-//        // Problem_3
+        // Problem_3
 //        int[] nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
-//        int maxSum = maxSubarraySum(nums);
+//        int maxSum = problem_3(nums);
 //        System.out.println("Максимальная сумма подмассива: " + maxSum);
+
+        // Problem_4
+        int[][] matrix = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+
+        System.out.println("Исходная матрица:");
+        printMatrix(matrix);
+
+        int[][] resultMatrix = problem_4(matrix);
+
+        System.out.println("\nМатрица, повернутая на 90 градусов по часовой стрелке:");
+        printMatrix(resultMatrix);
     }
 
     static int[] problem_2(int[] arr1, int[] arr2) {
@@ -41,7 +56,7 @@ public class Main {
 
         return mergedArray;
     }
-    static int maxSubarraySum(int[] nums) {
+    static int problem_3(int[] nums) {
         if (nums == null || nums.length == 0) throw new IllegalArgumentException("Пустой массив.");
 
         int maxSum = nums[0];
@@ -52,6 +67,33 @@ public class Main {
         }
         return maxSum;
     }
+    static int[][] problem_4(int[][] matrix) {
+        if (matrix == null || matrix.length == 0 || matrix.length != matrix[0].length) {
+            throw new IllegalArgumentException("Ошибка при создании матрицы");
+        }
+
+        int n = matrix.length;
+        int[][] rotatedMatrix = new int[n][n];
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                rotatedMatrix[i][j] = matrix[n - 1 - j][i];
+            }
+        }
+
+        return rotatedMatrix;
+    }
+
+    static void printMatrix(int[][] matrix) {
+        for (int[] row : matrix) {
+            for (int num : row) {
+                System.out.print(num + " ");
+            }
+            System.out.println();
+        }
+    }
+
+
 }
 
 
