@@ -21,15 +21,20 @@ public class Main {
                 {4, 5, 6},
                 {7, 8, 9}
         };
+//
+//        System.out.println("Исходная матрица:");
+//        printMatrix(matrix);
+//
+//        int[][] resultMatrix = problem_4(matrix);
+//
+//        System.out.println("\nМатрица, повернутая на 90 градусов по часовой стрелке:");
+//        printMatrix(resultMatrix);
 
-        System.out.println("Исходная матрица:");
-        printMatrix(matrix);
-
-        int[][] resultMatrix = problem_4(matrix);
-
-        System.out.println("\nМатрица, повернутая на 90 градусов по часовой стрелке:");
-        printMatrix(resultMatrix);
+        // Problem_6
+        int totalSum = problem_6(matrix);
+        System.out.println("Сумма всех элементов в двумерном массиве: " + totalSum);
     }
+
 
     static int[] problem_2(int[] arr1, int[] arr2) {
         int[] mergedArray = new int[arr1.length + arr2.length];
@@ -82,6 +87,18 @@ public class Main {
         }
 
         return rotatedMatrix;
+    }
+
+    static int problem_6(int[][] arr) {
+        int sum = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                sum += arr[i][j];
+            }
+        }
+
+        return sum;
     }
 
     static void printMatrix(int[][] matrix) {
