@@ -33,6 +33,14 @@ public class Main {
         // Problem_6
         int totalSum = problem_6(matrix);
         System.out.println("Сумма всех элементов в двумерном массиве: " + totalSum);
+
+        // Problem_7
+        int[] maxElementsInMatrixRows = problem_7(matrix);
+
+        System.out.println("Максимальные элементы в каждой строке:");
+        for (int maxElement : maxElementsInMatrixRows) {
+            System.out.print(maxElement + " ");
+        }
     }
 
 
@@ -99,6 +107,29 @@ public class Main {
         }
 
         return sum;
+    }
+
+    static int[] problem_7(int[][] arr) {
+        if (arr == null || arr.length == 0) {
+            throw new IllegalArgumentException("Ошибка при создании матрицы");
+        }
+
+        int numRows = arr.length;
+        int[] maxElements = new int[numRows];
+
+        for (int i = 0; i < numRows; i++) {
+            int max = Integer.MIN_VALUE;
+
+            for (int j = 0; j < arr[i].length; j++) {
+                if (arr[i][j] > max) {
+                    max = arr[i][j];
+                }
+            }
+
+            maxElements[i] = max;
+        }
+
+        return maxElements;
     }
 
     static void printMatrix(int[][] matrix) {
