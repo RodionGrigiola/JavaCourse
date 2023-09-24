@@ -2,13 +2,18 @@ public class Main {
     public static void main(String[] args) {
 
         // Problem_2
-        int[] arr1 = {1, 3, 5, 7};
-        int[] arr2 = {2, 4, 6, 8};
-        int[] mergedArray = problem_2(arr1, arr2);
-        System.out.println("Массив после слияния:");
-        for (int num : mergedArray) {
-            System.out.print(num + " ");
-        }
+//        int[] arr1 = {1, 3, 5, 7};
+//        int[] arr2 = {2, 4, 6, 8};
+//        int[] mergedArray = problem_2(arr1, arr2);
+//        System.out.println("Массив после слияния:");
+//        for (int num : mergedArray) {
+//            System.out.print(num + " ");
+//        }
+
+//        // Problem_3
+//        int[] nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+//        int maxSum = maxSubarraySum(nums);
+//        System.out.println("Максимальная сумма подмассива: " + maxSum);
     }
 
     static int[] problem_2(int[] arr1, int[] arr2) {
@@ -36,7 +41,17 @@ public class Main {
 
         return mergedArray;
     }
+    static int maxSubarraySum(int[] nums) {
+        if (nums == null || nums.length == 0) throw new IllegalArgumentException("Пустой массив.");
 
+        int maxSum = nums[0];
+        int currentSum = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            currentSum = Math.max(nums[i], currentSum + nums[i]);
+            maxSum = Math.max(maxSum, currentSum);
+        }
+        return maxSum;
+    }
 }
 
 
