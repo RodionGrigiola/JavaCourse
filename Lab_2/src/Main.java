@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -30,17 +32,28 @@ public class Main {
 //        System.out.println("\nМатрица, повернутая на 90 градусов по часовой стрелке:");
 //        printMatrix(resultMatrix);
 
-        // Problem_6
-        int totalSum = problem_6(matrix);
-        System.out.println("Сумма всех элементов в двумерном массиве: " + totalSum);
+        // Problem_5
+        int[] nums_2 = {3, 12, 52, 11, 9, 18};
+        int target = 20;
+        int[] result = problem_5(nums_2, target);
 
-        // Problem_7
-        int[] maxElementsInMatrixRows = problem_7(matrix);
-
-        System.out.println("Максимальные элементы в каждой строке:");
-        for (int maxElement : maxElementsInMatrixRows) {
-            System.out.print(maxElement + " ");
+        if (result != null) {
+            System.out.println("Пара элементов, сумма которых равна " + target + ": " + result[0] + ", " + result[1]);
+        } else {
+            System.out.println("Такая пара не существует.");
         }
+
+        // Problem_6
+//        int totalSum = problem_6(matrix);
+//        System.out.println("Сумма всех элементов в двумерном массиве: " + totalSum);
+//
+//        // Problem_7
+//        int[] maxElementsInMatrixRows = problem_7(matrix);
+//
+//        System.out.println("Максимальные элементы в каждой строке:");
+//        for (int maxElement : maxElementsInMatrixRows) {
+//            System.out.print(maxElement + " ");
+//        }
     }
 
 
@@ -69,6 +82,7 @@ public class Main {
 
         return mergedArray;
     }
+
     static int problem_3(int[] nums) {
         if (nums == null || nums.length == 0) throw new IllegalArgumentException("Пустой массив.");
 
@@ -80,6 +94,7 @@ public class Main {
         }
         return maxSum;
     }
+
     static int[][] problem_4(int[][] matrix) {
         if (matrix == null || matrix.length == 0 || matrix.length != matrix[0].length) {
             throw new IllegalArgumentException("Ошибка при создании матрицы");
@@ -95,6 +110,27 @@ public class Main {
         }
 
         return rotatedMatrix;
+    }
+
+    public static int[] problem_5(int[] nums, int target) {
+        // Сначала отсортируем массив
+        Arrays.sort(nums);
+
+        int left = 0; // Указатель на начало массива
+        int right = nums.length - 1; // Указатель на конец массива
+
+        while (left < right) {
+            int sum = nums[left] + nums[right];
+            if (sum == target) {
+                return new int[]{nums[left], nums[right]};
+            } else if (sum < target) {
+                left++; // Увеличиваем указатель на начало массива, чтобы увеличить сумму
+            } else {
+                right--; // Уменьшаем указатель на конец массива, чтобы уменьшить сумму
+            }
+        }
+
+        return null;
     }
 
     static int problem_6(int[][] arr) {
