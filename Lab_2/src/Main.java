@@ -3,19 +3,25 @@ import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {
 
+        // Problem_1
+        String s = "abcabcbbcabccabdacsfv";
+        String longest = problem_1(s);
+        System.out.println("Наибольшая подстрока с уникальными символами: " + longest);
+
         // Problem_2
-//        int[] arr1 = {1, 3, 5, 7};
-//        int[] arr2 = {2, 4, 6, 8};
-//        int[] mergedArray = problem_2(arr1, arr2);
-//        System.out.println("Массив после слияния:");
-//        for (int num : mergedArray) {
-//            System.out.print(num + " ");
-//        }
+        int[] arr1 = {1, 3, 5, 7};
+        int[] arr2 = {2, 4, 6, 8};
+        int[] mergedArray = problem_2(arr1, arr2);
+        System.out.print("Массив после слияния: ");
+        for (int num : mergedArray) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
 
         // Problem_3
-//        int[] nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
-//        int maxSum = problem_3(nums);
-//        System.out.println("Максимальная сумма подмассива: " + maxSum);
+        int[] nums = {-2, 1, -3, 4, -1, 2, 1, -5, 4};
+        int maxSum = problem_3(nums);
+        System.out.println("Максимальная сумма подмассива: " + maxSum);
 
         // Problem_4
         int[][] matrix = {
@@ -23,14 +29,14 @@ public class Main {
                 {4, 5, 6},
                 {7, 8, 9}
         };
-//
-//        System.out.println("Исходная матрица:");
-//        printMatrix(matrix);
-//
-//        int[][] resultMatrix = problem_4(matrix);
-//
-//        System.out.println("\nМатрица, повернутая на 90 градусов по часовой стрелке:");
-//        printMatrix(resultMatrix);
+
+        System.out.println("Исходная матрица:");
+        printMatrix(matrix);
+
+        int[][] resultMatrix = problem_4(matrix);
+
+        System.out.println("\nМатрица, повернутая на 90 градусов по часовой стрелке:");
+        printMatrix(resultMatrix);
 
         // Problem_5
         int[] nums_2 = {3, 12, 52, 11, 9, 18};
@@ -44,16 +50,50 @@ public class Main {
         }
 
         // Problem_6
-//        int totalSum = problem_6(matrix);
-//        System.out.println("Сумма всех элементов в двумерном массиве: " + totalSum);
-//
-//        // Problem_7
-//        int[] maxElementsInMatrixRows = problem_7(matrix);
-//
-//        System.out.println("Максимальные элементы в каждой строке:");
-//        for (int maxElement : maxElementsInMatrixRows) {
-//            System.out.print(maxElement + " ");
-//        }
+        int totalSum = problem_6(matrix);
+        System.out.println("Сумма всех элементов в двумерном массиве: " + totalSum);
+
+        // Problem_7
+        int[] maxElementsInMatrixRows = problem_7(matrix);
+
+        System.out.print("Максимальные элементы в каждой строке: ");
+        for (int maxElement : maxElementsInMatrixRows) {
+            System.out.print(maxElement + " ");
+        }
+    }
+
+    static String problem_1(String s) {
+        if (s == null || s.length() == 0) {
+            return "";
+        }
+
+        int end; // Конечный индекс подстроки
+        int maxLength = 0; // Максимальная длина подстроки
+        int currentStart = 0; // Начальный индекс текущей подстроки
+        int currentLength = 0; // Текущая длина подстроки
+        String longestSubstring = ""; // Наибольшая подстрока без повторяющихся символов
+
+        for (end = 0; end < s.length(); end++) {
+            char currentChar = s.charAt(end);
+
+            // Проверяем, если текущий символ повторяется в текущей подстроке
+            for (int i = currentStart; i < end; i++) {
+                if (s.charAt(i) == currentChar) {
+                    currentStart = i + 1; // Обновляем начальный индекс текущей подстроки
+                    break;
+                }
+            }
+
+            currentLength = end - currentStart + 1;
+
+            if (currentLength > maxLength) {
+                maxLength = currentLength;
+                longestSubstring = s.substring(currentStart, end + 1);
+            }
+            System.out.println(longestSubstring);
+        }
+
+        return longestSubstring;
     }
 
 
