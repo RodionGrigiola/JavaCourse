@@ -6,7 +6,7 @@ public class Knight extends Figure{
     }
 
     @Override
-    public boolean canMove(int row, int col, int row1, int col1) {
+    public boolean canMove(int row, int col, int row1, int col1, Figure[][] fields) {
         if ((Math.abs(row - row1)==1 && Math.abs(col - col1)==2) || (Math.abs(row - row1)==2 && Math.abs(col - col1)==1)){
             return true;
         }
@@ -15,7 +15,7 @@ public class Knight extends Figure{
     }
 
     @Override
-    public boolean canAttack(int row, int col, int row1, int col1) {
-        return this.canMove(row, col, row1, col1);
+    public boolean canAttack(int row, int col, int row1, int col1, Figure[][] fields) {
+        return this.canMove(row, col, row1, col1, fields);
     }
 }

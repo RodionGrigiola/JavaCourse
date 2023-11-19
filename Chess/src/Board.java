@@ -9,7 +9,6 @@ import Figures.Rook;
 import java.util.ArrayList;
 
 public class Board {
-//TODO: Список фигур и начальное положение всех фигур
     private Figure  fields[][] = new Figure[8][8];
     private ArrayList<String> takeWhite = new ArrayList(16);
     private ArrayList<String> takeBlack = new ArrayList(16);
@@ -60,6 +59,7 @@ public class Board {
         return " "+figure.getColor()+figure.getName()+" ";
     }
 
+
     public ArrayList<String> getTakeWhite() {
         return takeWhite;
     }
@@ -72,20 +72,21 @@ public class Board {
 
         Figure figure =  this.fields[row1][col1];
 
-        if (figure.canMove(row1, col1, row2, col2) && this.fields[row2][col2]==null){
+        if (this.fields[row2][col2]==null && figure.canMove(row1, col1, row2, col2, this.fields)){
             System.out.println("move");
             this.fields[row2][col2] = figure;
             this.fields[row1][col1] = null;
             return true;
-        } else if (figure.canAttack(row1, col1, row2, col2) && this.fields[row2][col2] != null && this.fields[row2][col2].getColor() != this.fields[row1][col1].getColor() ){
+        }
+        else if (this.fields[row2][col2] != null && figure.canAttack(row1, col1, row2, col2, this.fields) && this.fields[row2][col2].getColor() != this.fields[row1][col1].getColor() ){
             System.out.println("attack");
            switch (this.fields[row2][col2].getColor()){
-            case 'w': this.takeWhite.add(this.fields[row2][col2].getColor()+this.fields[row2][col2].getName());break;
-            case 'b': this.takeBlack.add(this.fields[row2][col2].getColor()+this.fields[row2][col2].getName());break;
-            }
-            this.fields[row2][col2] = figure;
-            this.fields[row1][col1] = null;
-            return true;
+                case 'w': this.takeWhite.add(this.fields[row2][col2].getColor()+this.fields[row2][col2].getName());break;
+                case 'b': this.takeBlack.add(this.fields[row2][col2].getColor()+this.fields[row2][col2].getName());break;
+           }
+           this.fields[row2][col2] = figure;
+           this.fields[row1][col1] = null;
+           return true;
         }
         return false;
 
