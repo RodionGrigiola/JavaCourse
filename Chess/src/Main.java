@@ -6,8 +6,6 @@ public class Main {
         board.setColorGaming('w');
         board.init();
 
-        System.out.println(Integer.compare(4, 5));
-
         boolean game = true;
 
         Scanner in = new Scanner(System.in);
@@ -36,10 +34,20 @@ public class Main {
 
             int x1, y1, x2, y2;
             String[] coords = inputLine.split(" ");
-            y1 = Integer.parseInt(coords[0]);
-            x1 = Integer.parseInt(coords[1]);
-            y2 = Integer.parseInt(coords[2]);
-            x2 = Integer.parseInt(coords[3]);
+
+                y1 = Integer.parseInt(coords[0]);
+                x1 = Integer.parseInt(coords[1]);
+                y2 = Integer.parseInt(coords[2]);
+                x2 = Integer.parseInt(coords[3]);
+
+                while(x1 > 7 || x1 < 0 || y1 > 7 || y1 < 0 || x2 > 7 || x2 < 0 || y2 < 0 || y2 > 7){
+                    System.out.println("Выбрано несуществующее поле, давайте по новой");
+                    coords = in.nextLine().split(" ");
+                    y1 = Integer.parseInt(coords[0]);
+                    x1 = Integer.parseInt(coords[1]);
+                    y2 = Integer.parseInt(coords[2]);
+                    x2 = Integer.parseInt(coords[3]);
+                }
 
 
             while (!board.move_figure(y1,x1, y2,x2)){

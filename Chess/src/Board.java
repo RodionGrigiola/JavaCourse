@@ -75,24 +75,63 @@ public class Board {
             return false;
         }
 
+        if(firstFigure.getColor() != getColorGaming()) {
+            System.out.println("Эта фигура вам не принадлежит, своими ходите");
+            return false;
+        }
+
         Figure secondFigure = this.fields[row2][col2];
+
         if (secondFigure == null && firstFigure.canMove(row1, col1, row2, col2, this.fields)){
-            System.out.println("move");
-            this.fields[row2][col2] = firstFigure;
-            this.fields[row1][col1] = null;
+            move(row1, col1, row2, col2, fields);
             return true;
         }
         else if (secondFigure != null && firstFigure.canAttack(row1, col1, row2, col2, this.fields)){
-            System.out.println("attack");
-           switch (secondFigure.getColor()){
-                case 'w': this.takeWhite.add(secondFigure.getColor() + secondFigure.getName());break;
-                case 'b': this.takeBlack.add(secondFigure.getColor() + secondFigure.getName());break;
-           }
-           this.fields[row2][col2] = firstFigure;
-           this.fields[row1][col1] = null;
+           attack(row1, col1, row2, col2, this.fields);
            return true;
         }
         return false;
+    }
+
+    private boolean check(int kingRow, int kingCol, Figure[][] fields) {
+        for (int currentRow = 0; currentRow < 8; currentRow++) {
+            for (int currentCol = 0; currentCol < 8; currentCol++) {
+
+                if (fields[currentRow][currentCol].getColor() == fields[kingRow][kingCol].getColor()
+                        || fields[currentRow][currentCol] == null) continue;
+
+                if (fields[currentRow][currentCol].canAttack(currentRow, currentCol, kingRow, kingCol, fields))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean mate(int row, int col, int kingRow, int kingCol, Figure[][] fields) {
+        // 1) Проверка на то можно ли уйти из под шаха и избежать мата
+        for (int availableRowCoef = -1; availableRowCoef < 2; availableRowCoef++ ) {
+            for (int availableColCoef = -1; availableColCoef < 2; availableColCoef++) {
+
+                if (kingRow + availableRowCoef > 7 || kingRow + availableRowCoef < 0
+                        || kingCol + availableColCoef > 7 || kingCol + availableColCoef < 0
+                        || (availableRowCoef == 0 && availableColCoef == 0)) continue;
+
+                if(fields[kingRow + availableRowCoef][kingCol + availableColCoef] == null
+                        && !check(kingRow + availableRowCoef, kingCol + availableColCoef, fields))
+                    return false;
+            }
+        }
+
+        // 2) Проверка на возможность защитить короля от шаха и избежать мата
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                Figure figure = this.fields[i][j];
+                if (figure == null || figure.getColor() != fields[kingRow][kingCol].getColor()) continue;
+                if (figure.getName().equals("K") && check(row, col, fields)) continue;
+                if (figure.canAttack(i, j, row, col, fields)) return false;
+            }
+        }
+        return true;
     }
 
     public void print_board(){
@@ -113,5 +152,20 @@ public class Board {
 
     }
 
+    private void move(int row1, int col1, int row2, int col2, Figure[][] fields) {
+        System.out.println("move");
+        fields[row2][col2] = fields[row1][col1];
+        fields[row1][col1] = null;
+    }
+
+    private void attack(int row1, int col1, int row2, int col2, Figure[][] fields) {
+        System.out.println("attack");
+        switch (fields[row2][col2].getColor()){
+            case 'w': this.takeWhite.add(fields[row2][col2].getColor() + fields[row2][col2].getName());break;
+            case 'b': this.takeBlack.add(fields[row2][col2].getColor() + fields[row2][col2].getName());break;
+        }
+        fields[row2][col2] = fields[row1][col1];
+        fields[row1][col1] = null;
+    }
 
 }
