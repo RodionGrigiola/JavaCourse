@@ -13,8 +13,4 @@ public class King extends Figure{
         return false;
     }
 
-    @Override
-    public boolean canAttack(int row, int col, int row1, int col1, Figure[][] fields) {
-        return this.canMove(row, col, row1, col1, fields);
-    }
 }

@@ -6,6 +6,8 @@ public class Main {
         board.setColorGaming('w');
         board.init();
 
+        System.out.println(Integer.compare(4, 5));
+
         boolean game = true;
 
         Scanner in = new Scanner(System.in);

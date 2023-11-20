@@ -10,43 +10,18 @@ public class Pawn extends Figure {
 
     @Override
     public boolean canMove(int row, int col, int row1, int col1, Figure[][] fields) {
-        //   if (!super.canMove(row, col, row1, col1)){
-        //       return false;
-        //   }
-
+        if (col != col1) return false;
         if (this.isFirstStep) {
-            if (((((row + 2 == row1) || (row + 1 == row1)) && this.getColor() == 'w') ||
-                    (((row - 2 == row1) || (row - 1 == row1)) && this.getColor() == 'b')) && (col == col1)) {
+            if ((Math.abs(row1 - row) == 2 || Math.abs(row1 - row) == 1)) {
                 this.isFirstStep = false;
                 return true;
             }
-
-        } else {
-            if ((((row + 1 == row1) && (this.getColor() == 'w')) || ((row - 1 == row1) && (this.getColor() == 'b'))) && (col == col1)) {
-                return true;
-            }
-
         }
-        return false;
+        return Math.abs(row1 - row) == 1 && fields[row1][col1] == null;
     }
 
     @Override
     public boolean canAttack(int row, int col, int row1, int col1, Figure[][] fields) {
-        switch (this.getColor()) {
-            case 'w':
-                if (Math.abs(row - row1) == 1 && Math.abs(col - col1) == 1) {
-                    return true;
-                }
-                ;
-                break;
-            case 'b':
-                if (Math.abs(row - row1) == 1 && Math.abs(col - col1) == 1) {
-                    return true;
-                }
-                ;
-                break;
-        }
-
-        return false;
+        return Math.abs(row - row1) == 1 && Math.abs(col - col1) == 1 && fields[row1][col1].getColor() != this.getColor();
     }
 }

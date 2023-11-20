@@ -35,7 +35,7 @@ public abstract class Figure {
     }
 
     public boolean canAttack(int row, int col, int row1, int col1, Figure[][] fields){
-        return this.canMove(row, col, row1, col1, fields);
+        return this.canMove(row, col, row1, col1, fields) && fields[row1][col1].getColor() != this.getColor();
     }
 
 }
