@@ -6,11 +6,9 @@ public class Main {
         board.setColorGaming('w');
         board.init();
 
-        boolean game = true;
-
         Scanner in = new Scanner(System.in);
 
-        while (game) {
+        while (!board.isGameOver) {
             board.print_board();
             System.out.println();
             System.out.println("Команды: ");
